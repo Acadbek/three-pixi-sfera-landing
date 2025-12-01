@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Senior Creative Dev | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Syne:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS ni alohida faylga olishingiz ham mumkin */
+        :root {
+            --bg-color: #050505;
+            --text-main: oklch(100% 0.00011 271.152 / 0.793);
+            --text-muted: #888888;
+            --accent: #00ffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* 3D Canvas orqada turadi */
+        #pixi-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            /* Click canvasdan o'tib matnga tushishi uchun */
+        }
+
+        /* Umumiy Section Stili */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Syne', sans-serif;
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* 1. HERO SECTION */
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 8rem);
+            /* Responsiv katta shrift */
+            line-height: 0.9;
+            color: oklch(100% 0.00011 271.152 / 0.793);
+            mix-blend-mode: exclusion;
+            /* Matn zarrachalar bilan "aralashadi" */
+        }
+
+        .hero p {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 400px;
+        }
+
+        /* 2. ABOUT SECTION (Glassmorphism) */
+        .about {
+            align-items: flex-end;
+            /* O'ng tarafda turadi */
+            text-align: right;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 500px;
+        }
+
+        /* 3. PROJECTS SECTION */
+        .projects h2 {
+            font-size: 4rem;
+            margin-bottom: 50px;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+            /* Faqat chegarasi ko'rinadi */
+        }
+
+        .project-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .project-item {
+            font-size: 2rem;
+            font-family: 'Syne', sans-serif;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .project-item:hover {
+            color: var(--accent);
+        }
+
+        /* 4. CONTACT SECTION */
+        .contact {
+            align-items: center;
+            text-align: center;
+        }
+
+        .contact a {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2rem, 5vw, 5rem);
+            color: oklch(100% 0.00011 271.152 / 0.793);
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 10px;
+        }
+
+        /* Navigatsiya */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50px;
+            z-index: 10;
+            font-weight: bold;
+            letter-spacing: 2px;
+            mix-blend-mode: exclusion;
+        }
+
+        /* --- THE ARCHITECT STILI --- */
+        .about {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: start;
+            z-index: 1;
+            /* Matn 3D ustida turishi uchun */
+        }
+
+        .huge-text {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 8rem);
+            line-height: 0.85;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.5);
+
+            /* ENG MUHIM JOYI: Matn orqasidan sfera o'tsa rangi o'zgaradi */
+            mix-blend-mode: exclusion;
+        }
+
+        .description {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            max-width: 600px;
+            margin-top: 40px;
+            font-weight: 300;
+            color: #cccccc;
+            line-height: 1.6;
+        }
+
+        .highlight {
+            color: #00ffff;
+            /* Sizdagi accent rang (Cyan) */
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>JOHN DOE // DEV</nav>
+
+    <div id="pixi-container"></div>
+    <section class="hero">
+        <h1>Creative<br>Frontend<br>Developer</h1>
+        <p>Crafting immersive web experiences with PixiJS, Three.js & React.</p>
+    </section>
+
+    <section class="about">
+        <h2 class="huge-text">THE</h2>
+        <h2 class="huge-text">ARCHITECT</h2>
+
+        <p class="description">
+            I don't just write code; I build <span class="highlight">digital universes</span>.
+            Specializing in high-performance WebGL rendering and interactive storytelling.
+        </p>
+    </section>
+
+    <section class="projects">
+        <h2>Selected Works</h2>
+        <div class="project-list">
+            <div class="project-item">01. Galactic Market</div>
+            <div class="project-item">02. Neon Racer</div>
+            <div class="project-item">03. AI Dashboard</div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <h2>Ready to launch?</h2>
+        <br>
+        <a href="mailto:me@example.com">hello@johndoe.com</a>
+    </section>
+
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
